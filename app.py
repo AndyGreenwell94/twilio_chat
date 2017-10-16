@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 from faker import Factory
 from twilio.rest import Client
 from twilio.jwt.access_token import AccessToken
@@ -165,6 +165,15 @@ def send_notification():
 
     return jsonify(message="Notification created!")
 
+@app.route('/webhooks', methods=['POST'])
+def webhooks():
+    """Simple webhooks handler
+    """
+    if request.method == 'POST':
+        print(request.form)
+        return '', 200
+    else:
+        abort(400)
 
 @app.route('/<path:path>')
 def static_file(path):

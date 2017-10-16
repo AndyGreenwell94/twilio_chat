@@ -85,6 +85,8 @@ $(function() {
     function setupChannel() {
         // Join the general channel
         generalChannel.join().then(function(channel) {
+            print('Joined channel as '
+            + '<span class="me">' + username + '</span>.', true);
             channel.getMessages().then(function(messages) {
               const totalMessages = messages.items.length;
               for (i = 0; i < totalMessages; i++) {
@@ -92,8 +94,6 @@ $(function() {
                 printMessage(message.author, message.body);
               }
             });
-            print('Joined channel as '
-            + '<span class="me">' + username + '</span>.', true);
         });
 
         // Listen for new messages sent to the channel
